@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>安装k8s - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="olOwOlo" /><meta name="description" content="" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.62.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%AE%89%E8%A3%85k8s/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="安装k8s" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%AE%89%E8%A3%85k8s/" />
+<meta property="article:published_time" content="2020-01-20T14:51:26+08:00" />
+<meta property="article:modified_time" content="2020-01-20T14:51:26+08:00" />
+<meta itemprop="name" content="安装k8s">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2020-01-20T14:51:26&#43;08:00" />
+<meta itemprop="dateModified" content="2020-01-20T14:51:26&#43;08:00" />
+<meta itemprop="wordCount" content="1453">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="安装k8s"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">安装k8s</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-01-20 </span>
+        
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <h2 id="k8s内运行ubuntu镜像">k8s内运行ubuntu镜像</h2>
+<h3 id="环境">环境</h3>
+<p>互相能访问的4台机器master,node01,node02,node03，4核心，内存8G
+使用root操作</p>
+<h3 id="安装k8s">安装k8s</h3>
+<h4 id="在master安装dockerkubeadm">在master安装docker、kubeadm</h4>
+<p>添加kubernetes软件源:</p>
+<p>在/etc/apt/sorce.list中添加一行：<code>deb https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial main</code></p>
+<p>添加秘钥 <code>apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 6A030B21BA07F4FB</code></p>
+<p>更新
+<code>apt update</code></p>
+<p>安装docker、kubeadm
+<code>apt install -y docker.io kubeadm</code></p>
+<h4 id="初始化k8s">初始化k8s</h4>
+<p>查询需要下载的镜像：<code>kubeadm config images list</code>
+比如1.17.0需要的是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">k8s.gcr.io/kube-apiserver:v1.17.0
+k8s.gcr.io/kube-controller-manager:v1.17.0
+k8s.gcr.io/kube-scheduler:v1.17.0
+k8s.gcr.io/kube-proxy:v1.17.0
+k8s.gcr.io/pause:3.1
+k8s.gcr.io/etcd:3.4.3-0
+k8s.gcr.io/coredns:1.6.5
+</code></pre></td></tr></table>
+</div>
+</div><p>利用国内的仓库下载需要的镜像：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.17.0
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.17.0
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.17.0
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.17.0
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.3-0
+  docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.5
+</code></pre></td></tr></table>
+</div>
+</div><p>将镜像打上标记，使k8s能识别：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.1 k8s.gcr.io/pause:3.1
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-apiserver:v1.17.0 k8s.gcr.io/kube-apiserver:v1.17.0
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-controller-manager:v1.17.0 k8s.gcr.io/kube-controller-manager:v1.17.0
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-scheduler:v1.17.0 k8s.gcr.io/kube-scheduler:v1.17.0
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy:v1.17.0 k8s.gcr.io/kube-proxy:v1.17.0
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/etcd:3.4.3-0 k8s.gcr.io/etcd:3.4.3-0
+  docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/coredns:1.6.5 k8s.gcr.io/coredns:1.6.5
+</code></pre></td></tr></table>
+</div>
+</div><p>关闭swap:<code>swapoff -a</code></p>
+<p>初始化k8s:<code>kubeadm init</code></p>
+<p>初始化成功的信息如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p <span class="nv">$HOME</span>/.kube
+  sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+  sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run <span class="s2">&#34;kubectl apply -f [podnetwork].yaml&#34;</span> with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.8.61:6443 --token xh3fjq.f5kzistanapm6ar1 <span class="se">\
+</span><span class="se"></span>    --discovery-token-ca-cert-hash sha256:63c15d5be7a677165c7867187dd063dd5ed72b3d51c8f99b61a3efe3dade029b 
+
+</code></pre></td></tr></table>
+</div>
+</div><p>根据上面的提示，依次执行：</p>
+<p><code>  mkdir -p $HOME/.kube</code></p>
+<p><code>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code></p>
+<p><code>  sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></p>
+<p>然后在<a href="https://kubernetes.io/docs/concepts/cluster-administration/addons/">https://kubernetes.io/docs/concepts/cluster-administration/addons/</a>选择一个网络插件，这里使用的是<a href="https://www.weave.works/docs/net/latest/kube-addon/">weave net</a>。</p>
+<p>添加weave net插件：</p>
+<p><code>kubectl apply -n kube-system -f &quot;https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&quot;</code></p>
+<h4 id="将节点加入到集群中">将节点加入到集群中</h4>
+<p>在每一个节点安装docker、kubeadm:</p>
+<p><code>apt install docker.io kubeadm -y</code></p>
+<p>在24小时内在节点执行master安装k8s后的提示信息，例如：</p>
+<p><code>kubeadm join 192.168.8.61:6443 --token xh3fjq.f5kzistanapm6ar1 \ --discovery-token-ca-cert-hash sha256:63c15d5be7a677165c7867187dd063dd5ed72b3d51c8f99b61a3efe3dade029b </code></p>
+<p>在master下查看node的加入情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@desktop:~# kubectl get node
+NAME      STATUS     ROLES    AGE    VERSION
+desktop   Ready      master   125m   v1.17.0
+node01    Ready      &lt;none&gt;   117m   v1.17.0
+node02    NotReady   &lt;none&gt;   116m   v1.17.0
+node03    Ready      &lt;none&gt;   104m   v1.17.0
+</code></pre></td></tr></table>
+</div>
+</div><p>如果状态是NotReady,可能是节点没有禁用swap。</p>
+<h4 id="安装dashboard">安装dashboard</h4>
+<p>使用yaml安装dashboard：</p>
+<p><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta5/aio/deploy/recommended.yaml</code></p>
+<p>创建 ServiceAccount 和 ClusterRoleBinding，创建一个 auth.yaml，内容如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">apiVersion<span class="p">:</span><span class="w"> </span>v1<span class="w">
+</span><span class="w"></span>kind<span class="p">:</span><span class="w"> </span>ServiceAccount<span class="w">
+</span><span class="w"></span>metadata<span class="p">:</span><span class="w">
+</span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>admin-user<span class="w">
+</span><span class="w">  </span>namespace<span class="p">:</span><span class="w"> </span>kubernetes-dashboard<span class="w">
+</span><span class="w">
+</span><span class="w"></span>---<span class="w">
+</span><span class="w"></span>apiVersion<span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
+</span><span class="w"></span>kind<span class="p">:</span><span class="w"> </span>ClusterRoleBinding<span class="w">
+</span><span class="w"></span>metadata<span class="p">:</span><span class="w">
+</span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>admin-user<span class="w">
+</span><span class="w"></span>roleRef<span class="p">:</span><span class="w">
+</span><span class="w">  </span>apiGroup<span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io<span class="w">
+</span><span class="w">  </span>kind<span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
+</span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>cluster-admin<span class="w">
+</span><span class="w"></span>subjects<span class="p">:</span><span class="w">
+</span><span class="w"></span>-<span class="w"> </span>kind<span class="p">:</span><span class="w"> </span>ServiceAccount<span class="w">
+</span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>admin-user<span class="w">
+</span><span class="w">  </span>namespace<span class="p">:</span><span class="w"> </span>kubernetes-dashboard<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>执行<code> kubectl apply -f auth.yaml</code></p>
+<p>获得token：</p>
+<p><code>kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')</code></p>
+<p>输出的信息如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@desktop:~# kubectl -n kubernetes-dashboard describe secret <span class="k">$(</span>kubectl -n kubernetes-dashboard get secret <span class="p">|</span> grep admin-user <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+Name:         admin-user-token-vpr7v
+Namespace:    kubernetes-dashboard
+Labels:       &lt;none&gt;
+Annotations:  kubernetes.io/service-account.name: admin-user
+              kubernetes.io/service-account.uid: f44f954e-581c-4b9f-88a7-98e566442ed8
+
+Type:  kubernetes.io/service-account-token
+
+<span class="nv">Data</span>
+<span class="o">=</span><span class="o">=</span><span class="o">=</span><span class="o">=</span>
+ca.crt:     <span class="m">1025</span> bytes
+namespace:  <span class="m">20</span> bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6Ik41c1ZnR2tIRU4tNktOQV84YzQ0UUNGZzhQRHZPZENsRjkza21iejQ4M2MifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLXZwcjd2Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJmNDRmOTU0ZS01ODFjLTRiOWYtODhhNy05OGU1NjY0NDJlZDgiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.a3Bj81-2xIHsSJ0isP6qXjmpazJmh1bkn3tjaQefOmrLUmgmnrEsDMobeD-6YasJ0i4Iq69hT8ITWRr5XyZ1MZx7ueGwsqdGzYQIgnGS5xIUISi7sJjRQ_K9aoh29WaL4WBBkiOQb8xBOShH7-Lp72a6EqZnko5UkorolLNJzquow27sDc4gcB-c8wRs_bl2hD-BuraPremQlBhleKgsab49xUWjgE45GYIW46nzmqwPTl-B6MBUNyj442WrHecf7Yy50mgf6lXFVHzkHaHjcWH3OfgKu7GV3WBoc0K6oLen2R5awYmJe31sLcoFFBp64MRfbhO3kGGRboXTqRUeEQ
+
+</code></pre></td></tr></table>
+</div>
+</div><p>记录下token，以便登录bashboard。</p>
+<p>启动proxy:</p>
+<p><code>kubectl procy</code></p>
+<p>然后登录 <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/">dashboard</a>，使用token方式登录：</p>
+<p><img src="https://s2.ax1x.com/2020/01/09/lW5W0H.png" alt="Screenshot from 2020-01-09 17-22-52"></p>
+<h3 id="运行ubuntu镜像">运行ubuntu镜像</h3>
+<h4 id="下载镜像">下载镜像</h4>
+<p>每一个节点都需要下载ubuntu：</p>
+<p><code>docker pull ubuntu</code></p>
+<h4 id="编写yaml">编写yaml</h4>
+<p>myubuntu.yaml如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">apiVersion<span class="p">:</span><span class="w"> </span>v1<span class="w">
+</span><span class="w"></span>kind<span class="p">:</span><span class="w"> </span>Pod<span class="w">
+</span><span class="w"></span>metadata<span class="p">:</span><span class="w">
+</span><span class="w"> </span><span class="c">#Pod的名称，全局唯一</span><span class="w">
+</span><span class="w"> </span>name<span class="p">:</span><span class="w"> </span>myubuntu<span class="w">
+</span><span class="w"> </span>labels<span class="p">:</span><span class="w">
+</span><span class="w">  </span>name<span class="p">:</span><span class="w"> </span>myubuntu<span class="w">
+</span><span class="w"></span>spec<span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c">#设置存储卷</span><span class="w">
+</span><span class="w">  </span>volumes<span class="p">:</span><span class="w">
+</span><span class="w">   </span>-<span class="w"> </span>name<span class="p">:</span><span class="w"> </span>myubuntulogs<span class="w">
+</span><span class="w">     </span>hostPath<span class="p">:</span><span class="w">
+</span><span class="w">      </span>path<span class="p">:</span><span class="w"> </span>/home/user/myubuntu<span class="w">
+</span><span class="w">  </span>containers<span class="p">:</span><span class="w">
+</span><span class="w">   </span><span class="c">#容器名称</span><span class="w">
+</span><span class="w">   </span>-<span class="w"> </span>name<span class="p">:</span><span class="w"> </span>myubuntu<span class="w">
+</span><span class="w">     </span><span class="c">#容器对应的Docker Image</span><span class="w">
+</span><span class="w">     </span>image<span class="p">:</span><span class="w"> </span>ubuntu<span class="w">
+</span><span class="w">     </span>command<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;--&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">     </span>args<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">&#34;while true; do sleep 3600; done;&#34;</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="w">     </span>volumeMounts<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>mountPath<span class="p">:</span><span class="w"> </span>/mydata-log<span class="w">
+</span><span class="w">        </span>name<span class="p">:</span><span class="w"> </span>myubuntulogs<span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>创建pod:<code>kubectl apply -f myubuntu.yaml</code></p>
+<p>打开dashboard，选择Pod-&gt;myubuntu ,右键点击exec，在dashboard进入ubuntu容器：</p>
+<p><img src="https://s2.ax1x.com/2020/01/09/lW5Rne.png" alt="Pod"></p>
+<h4 id="检查网络设置">检查网络设置：</h4>
+<p>在容器内下载常用的网络工具：</p>
+<p><code>apt install net-tools inetutils-ping -y</code></p>
+<p>检查路由：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@myubuntu:/# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         10.44.0.0       0.0.0.0         UG    <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> eth0
+10.32.0.0       0.0.0.0         255.240.0.0     U     <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> eth0
+</code></pre></td></tr></table>
+</div>
+</div><p>特别感谢<a href="https://www.cnblogs.com/yytlmm/p/9632698.html">yytlmm博主</a></p>
+    </div>
+
+    
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/even-preview/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Theme preview</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/hidden-post/">
+            <span class="next-text nav-default">This is a hidden post.</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">olOwOlo</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

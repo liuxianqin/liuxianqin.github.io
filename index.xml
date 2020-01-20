@@ -6,7 +6,7 @@
     <description>Recent content on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jan 2020 14:51:26 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
@@ -29,6 +29,15 @@
       <description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
  Cobra Viper J Walter Weatherman Cast  Learn more and contribute on GitHub.</description>
+    </item>
+    
+    <item>
+      <title>安装k8s</title>
+      <link>http://localhost:1313/post/ubuntu1910-install-k8s/</link>
+      <pubDate>Mon, 20 Jan 2020 14:51:26 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/ubuntu1910-install-k8s/</guid>
+      <description></description>
     </item>
     
     <item>
